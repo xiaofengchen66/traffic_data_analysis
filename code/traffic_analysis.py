@@ -32,8 +32,8 @@ print("=" * 60)
 print("Step 0: Data Loading & Preprocessing")
 print("=" * 60)
 
-CSV_PATH = "/mnt/user-data/uploads/2022-09-28_00.csv"
-OUTPUT_DIR = "/mnt/user-data/outputs"
+CSV_PATH = "../data/2022-09-28_00.csv"
+OUTPUT_DIR = "../outputs"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 rows = []
