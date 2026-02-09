@@ -37,8 +37,8 @@ pip3 install --upgrade pandas matplotlib seaborn folium scipy
 Open `code/traffic_analysis.py`, find these two lines near the top and set them to your local paths:
 
 ```python
-CSV_PATH = "/home/qiqingh/Desktop/traffic_data_analysis/data/2022-09-28_00.csv"
-OUTPUT_DIR = "/home/qiqingh/Desktop/traffic_data_analysis/outputs"
+CSV_PATH = "/home/Desktop/traffic_data_analysis/data/2022-09-28_00.csv"
+OUTPUT_DIR = "/home/Desktop/traffic_data_analysis/outputs"
 ```
 
 ### 3. Run
