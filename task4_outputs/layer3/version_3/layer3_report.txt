@@ -1,0 +1,94 @@
+============================================================
+TASK 4 LAYER 3 v2: WEATHER CORRECTION REPORT
+Generated: 2026-02-15 01:09:27
+Method: Daily wiper activation count + quantile threshold
+============================================================
+
+--- Weather Data Summary ---
+  Wiper events scanned: 694,703
+  Temperature readings: 31,652,116
+  Days with data: 56
+  Scan time: 540s (9.0 min)
+
+--- Wiper Activation Distribution (per day) ---
+  Min:    0
+  Q25:    0
+  Median: 2744
+  Q75:    4056
+  Max:    54792
+  Threshold (median): 2744
+
+--- Daily Weather Classification ---
+  dry_warm       : 28 days (50.0%)
+  rainy          : 28 days (50.0%)
+  Temperature range: 5.4°C to 17.9°C (mean 11.9°C)
+
+--- Safety Events Weather Distribution ---
+  rainy          : 5,174 (91.4%)
+  dry_warm       : 486 (8.6%)
+
+--- Weather Independence Scoring ---
+  Method: Rain enrichment ratio (event-level baseline)
+  Rainy days: 28/56 (50.0%)
+  Global safety event rainy rate: 91.4%
+  rain_enrichment = cluster_pct_rainy / global_rainy_rate (0.914)
+  independence = max(0, min(1, 2 - rain_enrichment))
+  Interpretation:
+    enrichment ≈ 1.0 → matches global pattern → independence = 1.0 (FIXED DEFECT)
+    enrichment ≈ 2.0 → 2x more rain-biased than average → independence = 0.0
+    enrichment ≈ 1.5 → moderately more rain-biased → independence = 0.5
+
+  Clusters with score: 431
+  Mean independence: 0.925
+  High independence (≥0.8): 431
+  Medium (0.5-0.8): 0
+  Low (<0.5): 0
+
+--- Top 20 Weather-Corrected Hotspots ---
+   Rk   ID  Evt  Brake  Dry  Rain    WI  Final      ZIP       Lat        Lon
+    1    0  202    221   25    79  1.00  0.616  14052.0  42.76685  -78.64488
+    2   60   32  13584    2    30  0.97  0.488  14261.0  42.99134  -78.78976
+    3  116   26  12071    2    24  0.99  0.461  14227.0  42.88405  -78.76632
+    4  254   66   5366    4    43  1.00  0.438  14086.0  42.92374  -78.62265
+    5   26   72   1987    4    68  0.97  0.421  14225.0  42.94576  -78.72477
+    6   34   22   8744    6    16  1.00  0.352  14225.0  42.92727  -78.75346
+    7   86   36   4057    4    32  1.00  0.346  14204.0  42.88400  -78.86833
+    8  410    9  14576    0     9  0.91  0.338  14221.0  42.99116  -78.78874
+    9  210   12  11014    2     9  1.00  0.333  14221.0  42.95623  -78.69691
+   10   95    6  13847    0     6  0.91  0.329  14051.0  43.05292  -78.72797
+   11  184   16  10023    0    16  0.91  0.312  14221.0  42.97769  -78.72470
+   12  232    4  12174    2     2  1.00  0.305  14304.0  43.08964  -78.98891
+   13  329    4  13038    0     4  0.91  0.296  14225.0  42.93008  -78.73844
+   14  148    9   9666    2     6  1.00  0.295  14150.0  43.00151  -78.82238
+   15   28    4  11436    2     2  1.00  0.288  14043.0  42.86799  -78.69880
+   16  387    6  11662    0     6  0.91  0.281  14150.0  43.00570  -78.82231
+   17  301    6  11382    0     6  0.91  0.275  14075.0  42.77021  -78.81120
+   18  187    4  12446    0     4  0.91  0.271  14228.0  43.03631  -78.82321
+   19  289    4  11633    0     4  0.91  0.265  14150.0  43.00487  -78.82241
+   20  146   10   7740    2     8  1.00  0.251  14227.0  42.90546  -78.72824
+
+--- Confirmed Fixed Defects (WI ≥ 0.8, 6+ events) ---
+  Count: 195 clusters
+  #0: 202 events, dry=25, rain=79, WI=1.00, final=0.616, ZIP=14052.0
+  #60: 32 events, dry=2, rain=30, WI=0.97, final=0.488, ZIP=14261.0
+  #116: 26 events, dry=2, rain=24, WI=0.99, final=0.461, ZIP=14227.0
+  #254: 66 events, dry=4, rain=43, WI=1.00, final=0.438, ZIP=14086.0
+  #26: 72 events, dry=4, rain=68, WI=0.97, final=0.421, ZIP=14225.0
+  #34: 22 events, dry=6, rain=16, WI=1.00, final=0.352, ZIP=14225.0
+  #86: 36 events, dry=4, rain=32, WI=1.00, final=0.346, ZIP=14204.0
+  #410: 9 events, dry=0, rain=9, WI=0.91, final=0.338, ZIP=14221.0
+  #210: 12 events, dry=2, rain=9, WI=1.00, final=0.333, ZIP=14221.0
+  #95: 6 events, dry=0, rain=6, WI=0.91, final=0.329, ZIP=14051.0
+  #184: 16 events, dry=0, rain=16, WI=0.91, final=0.312, ZIP=14221.0
+  #148: 9 events, dry=2, rain=6, WI=1.00, final=0.295, ZIP=14150.0
+  #387: 6 events, dry=0, rain=6, WI=0.91, final=0.281, ZIP=14150.0
+  #301: 6 events, dry=0, rain=6, WI=0.91, final=0.275, ZIP=14075.0
+  #146: 10 events, dry=2, rain=8, WI=1.00, final=0.251, ZIP=14227.0
+  #147: 16 events, dry=2, rain=14, WI=1.00, final=0.249, ZIP=14207.0
+  #129: 14 events, dry=0, rain=14, WI=0.91, final=0.247, ZIP=14203.0
+  #253: 12 events, dry=0, rain=12, WI=0.91, final=0.245, ZIP=14226.0
+  #110: 10 events, dry=0, rain=10, WI=0.91, final=0.244, ZIP=14225.0
+  #419: 6 events, dry=2, rain=4, WI=1.00, final=0.240, ZIP=14150.0
+
+--- Weather-Dependent Hotspots (WI < 0.5, 6+ events) ---
+  Count: 0 clusters
