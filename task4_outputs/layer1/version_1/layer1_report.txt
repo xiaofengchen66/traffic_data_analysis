@@ -1,0 +1,76 @@
+============================================================
+TASK 4 LAYER 1: ABS / ESC / AEB HOTSPOT ANALYSIS
+Generated: 2026-02-14 23:39:35
+============================================================
+
+Total safety-system events: 5660
+
+By event type:
+  ABS  : 5,103
+  ESC  : 446
+  AEB  : 111
+
+Field coverage:
+  speed          : 5,660 (100.0%)
+  accelerationX  : 5,660 (100.0%)
+  accelerationY  : 5,660 (100.0%)
+  heading        : 5,660 (100.0%)
+
+Speed at trigger (km/h):
+  Mean:   30.4
+  Median: 25.9
+  Min:    0.0
+  Max:    159.0
+  Std:    18.6
+
+Time range: 2022-09-27 18:53:30-04:00 to 2022-10-28 19:47:38-04:00
+Unique dates: 32
+Unique journeys: 2565
+Unique postal codes: 114
+
+Top 10 postal codes:
+  14221: 433
+  14052: 366
+  14086: 250
+  14225: 219
+  14226: 213
+  14094: 208
+  14150: 206
+  14203: 203
+  14216: 180
+  14214: 162
+
+--- Spatial Clustering (DBSCAN, eps=0.2km, min_samples=2) ---
+  Clusters found: 1270
+  Noise points:   0
+  Clustered:      5660
+
+--- Top 20 Hotspot Clusters (by event count) ---
+    ID  Events   ABS   ESC   AEB       Lat        Lon  AvgSpd  Dates  Trips    ZIP
+     0     208    70   138     0  42.76690  -78.64494    28.7     17     33  14052
+     7     155   153     2     0  42.88094  -78.87482    30.3     28     75  14203
+    25      72    70     2     0  42.89497  -78.86765    42.1     21     35  14203
+    56      72    72     0     0  42.94576  -78.72477    28.1     20     36  14225
+   523      66    66     0     0  42.92374  -78.62265    33.5     15     33  14086
+    71      55    46     4     5  42.99162  -78.78944    43.0     15     24  14261
+    76      50    50     0     0  42.95659  -78.87809    33.5     17     25  14216
+    91      50    50     0     0  42.88437  -78.86822    32.8     18     25  14203
+    20      44    38     6     0  42.93023  -78.85201    29.0     15     20  14214
+   372      40    40     0     0  43.00321  -78.85422    22.8     11     20  14150
+   260      40    40     0     0  42.93671  -78.88859    33.0     16     20  14207
+    61      38    38     0     0  42.93150  -78.90074    67.1     13     19  14207
+    82      30    20    10     0  42.94670  -78.87346    33.9     11     14  14216
+   206      28    28     0     0  42.88405  -78.76639    40.6     12     14  14227
+    17      26    26     0     0  42.89619  -78.81404    46.0      8     12  14212
+   390      26    24     2     0  42.95375  -78.69679    34.7      9     13  14221
+   348      26    26     0     0  42.96328  -78.67720    18.8     11     12  14221
+   147      26    26     0     0  42.94312  -78.84410    43.1     10     13  14214
+    68      24    24     0     0  42.92724  -78.75356    37.7     10     12  14225
+   525      24    24     0     0  42.92090  -78.63758    28.7      9     12  14086
+
+--- Feasibility Notes for Paper ---
+  1. ABS/ESC/AEB events are rare but high-value signals for road anomaly detection.
+  2. 100% of these events carry acceleration + speed + location data.
+  3. Spatial clustering reveals persistent hotspots (same location, multiple dates/trips).
+  4. Next step: cross-reference with HARD_BRAKE events (Layer 2) for validation.
+  5. External validation: compare hotspots against city 311 reports or road maintenance records.
